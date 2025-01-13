@@ -1,0 +1,168 @@
+/* Variabile pentru standardizarea spațierilor și dimensiunilor */
+:root {
+    --spacing-large: 3em;          /* Spațiere mare */
+    --spacing-medium: 12px;        /* Spațiere medie */
+    --font-size-base: 24px;        /* Dimensiune font de bază */
+    --line-height-base: 150%;      /* Înălțime linie de bază */
+    --figure-margin: 40px;         /* Spațiu între figuri */
+    --caption-font-size: 20px;     /* Dimensiune font legendă */
+    --table-padding: 12px;         /* Spațiere celule tabel */
+    --table-header-bg: lightgray;  /* Culoare fundal antet tabel */
+    --table-hover-bg: rgba(211, 211, 211, 0.25); /* Fundal hover tabel */
+    --color-caption: #555;         /* Culoare legendă */
+    --focus-outline: 3px solid blue; /* Outline pentru accesibilitate */
+}
+
+/* Stil general pentru document */
+html {
+    margin: 0 auto;
+    max-width: 1080px;
+    font-family: 'Unit Pro', 'Lucida Sans Regular', Verdana, Arial, sans-serif;
+    font-size: clamp(20px, 2.5vw, var(--font-size-base));
+    line-height: var(--line-height-base);
+    background-color: #eff3ed; /* Fundal general */
+    color: #333; /* Text implicit */
+}
+
+body {
+    counter-reset: section;
+}
+
+/* Titluri */
+h1 {
+    margin-top: 45%;
+    font-size: 48px;
+    line-height: calc(0.75 * var(--line-height-base));
+}
+
+h2 {
+    margin-top: var(--spacing-large);
+    font-weight: 900;
+    border-top: 1pt black dashed;
+    padding-top: var(--spacing-medium);
+    counter-increment: section; /* Incrementăm counter-ul la fiecare <h2> */
+}
+
+h2::before {
+    content: counter(section) ". ";
+}
+
+h2:hover {
+    color: darkblue;
+}
+
+h4 {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 90%;
+    text-transform: uppercase;
+}
+
+h4 + p {
+    margin-top: 0;
+}
+
+/* Elemente <figure> */
+figure {
+    max-width: 80%; /* Limitează lățimea figurii */
+    margin: var(--figure-margin) auto; /* Centrează și adaugă spațiu vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left; /* Centrează textul din legendă */
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+figure img:hover {
+    transform: scale(1.03); /* Mărire cu 3% la hover */
+}
+
+figcaption {
+    margin-top: var(--spacing-medium);
+    font-size: var(--caption-font-size);
+    color: var(--color-caption);
+    line-height: 130%;
+    word-wrap: break-word; /* Previne depășirea containerului */
+}
+
+/* Stil pentru tabele */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--table-header-bg);
+    font-weight: 400;
+    padding: var(--table-padding);
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid black;
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--table-hover-bg);
+}
+
+.table td {
+    padding: var(--table-padding);
+}
+
+table caption {
+    text-align: left;
+    font-weight: 500;
+    padding-top: var(--spacing-medium);
+}
+
+td.empty {
+    background-color: rgba(211, 211, 211, 1);
+    color: white;
+    text-align: center;
+}
+
+.right-align {
+    text-align: right;
+    padding-right: var(--spacing-medium);
+}
+
+.th-last {
+    width: 400px;
+}
+
+/* Accesibilitate */
+a:focus, button:focus {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    .table th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    td.empty {
+        background-color: #444;
+        color: #fff;
+    }
+
+    figcaption {
+        color: #ccc;
+    }
+}
